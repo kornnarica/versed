@@ -1,0 +1,104 @@
+:root {
+  --bg: #ffffff; --fg: #121213; --muted: #6b6b70; --line: #d3d6da;
+  --tile: #f2f2f4; --green: #6aaa64; --yellow: #c9b458; --red: #d0605a; --accent: #121213; --accent-fg: #fff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121213; --fg: #f4f4f5; --muted: #9a9aa2; --line: #3a3a3c;
+    --tile: #232325; --green: #538d4e; --yellow: #b59f3b; --red: #b4514b; --accent: #f4f4f5; --accent-fg: #121213;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.hidden { display: none !important; }
+.muted { color: var(--muted); font-size: .9rem; }
+.center { text-align: center; justify-content: center; }
+
+.top { display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-bottom: 1px solid var(--line); }
+.top h1 { margin: 0; font-size: 1.9rem; letter-spacing: .12em; font-weight: 800; }
+.icon-btn { background: none; border: 1.5px solid var(--line); color: var(--fg); border-radius: 50%;
+  width: 36px; height: 36px; font-size: 1rem; cursor: pointer; }
+
+.modes { display: flex; gap: 6px; justify-content: center; padding: 12px 16px 0; }
+.modes button { background: var(--tile); color: var(--fg); border: 0; padding: 8px 14px; border-radius: 999px;
+  font-weight: 600; cursor: pointer; }
+.modes button.active { background: var(--accent); color: var(--accent-fg); }
+
+main { max-width: 760px; margin: 0 auto; padding: 16px; }
+.row { display: flex; gap: 8px; }
+input { flex: 1; min-width: 0; font: inherit; padding: 10px 12px; border: 2px solid var(--line);
+  border-radius: 8px; background: var(--bg); color: var(--fg); }
+input:focus { outline: none; border-color: var(--fg); }
+.btn { font: inherit; font-weight: 700; padding: 10px 16px; border-radius: 8px; border: 0;
+  background: var(--accent); color: var(--accent-fg); cursor: pointer; white-space: nowrap; }
+.btn:disabled { opacity: .4; cursor: default; }
+.btn-ghost { background: transparent; color: var(--fg); border: 2px solid var(--line); }
+
+.results { margin-top: 12px; display: grid; gap: 6px; }
+.result { display: flex; justify-content: space-between; gap: 10px; align-items: center; text-align: left;
+  padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--tile);
+  color: var(--fg); font: inherit; cursor: pointer; }
+.result:hover { border-color: var(--fg); }
+.result small { color: var(--muted); }
+
+.song-card { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.song-card img { width: 64px; height: 64px; border-radius: 8px; object-fit: cover; }
+.song-meta { flex: 1; min-width: 0; }
+.puzzle-no { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.song-title { font-size: 1.2rem; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.song-artist { color: var(--muted); }
+
+.hud { display: flex; align-items: center; gap: 12px; font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+.bar { flex: 1; height: 8px; background: var(--tile); border-radius: 99px; overflow: hidden; }
+#bar-fill { height: 100%; width: 0; background: var(--green); transition: width .25s; }
+
+.type-row { display: flex; gap: 8px; position: sticky; top: 0; background: var(--bg); padding: 6px 0; z-index: 5; }
+#in-guess { font-size: 1.1rem; }
+.flash { height: 1.4em; font-size: .9rem; color: var(--green); font-weight: 700; }
+
+.yt-box { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin: 6px 0 14px; }
+.yt-box summary { cursor: pointer; font-weight: 600; }
+.offset-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: .9rem; flex-wrap: wrap; }
+.offset-row input { flex: 1; padding: 0; }
+.yt-stage { position: relative; width: 220px; height: 124px; margin-top: 10px; }
+#yt-player-wrap iframe { width: 220px; height: 124px; border-radius: 8px; display: block; }
+.yt-cover { position: absolute; inset: 0; border: 0; border-radius: 8px; background: var(--tile);
+  color: var(--fg); font: inherit; font-weight: 700; cursor: pointer; padding: 8px; }
+.yt-cover small { font-weight: 400; color: var(--muted); font-size: .72rem; }
+
+.lyrics { display: grid; gap: 8px; padding-bottom: 40px; }
+.line { display: flex; align-items: flex-start; gap: 8px; }
+.line-play { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--line);
+  background: none; color: var(--fg); cursor: pointer; font-size: .7rem; margin-top: 2px; }
+.line-play.playing { background: var(--green); color: #fff; border-color: var(--green); }
+.words { display: flex; flex-wrap: wrap; gap: 5px; }
+.w { min-height: 30px; padding: 3px 6px; border-radius: 5px; background: var(--tile);
+  border-bottom: 2px solid var(--line); font-weight: 600; display: inline-flex; align-items: center;
+  color: transparent; user-select: none; }
+.w.on { color: var(--fg); background: transparent; border-bottom-color: var(--green); animation: pop .25s; }
+.w.missed { color: var(--red); background: transparent; border-bottom-color: var(--red); }
+@keyframes pop { 0% { transform: scale(1.25); } 100% { transform: scale(1); } }
+
+.loading, .error { text-align: center; padding: 40px 0; color: var(--muted); }
+.error { color: var(--red); }
+
+dialog { border: 1px solid var(--line); border-radius: 14px; background: var(--bg); color: var(--fg);
+  max-width: min(440px, calc(100vw - 32px)); padding: 22px; }
+dialog::backdrop { background: rgba(0,0,0,.5); }
+dialog h2 { margin-top: 0; }
+dialog ul { padding-left: 1.2em; }
+.big-score { font-size: 3.4rem; font-weight: 800; text-align: center; line-height: 1; }
+.grid { font-size: 1.3rem; line-height: 1.3; text-align: center; white-space: pre-wrap; font-family: inherit; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center; margin-bottom: 16px; }
+.stats b { display: block; font-size: 1.8rem; }
+.stats span { font-size: .75rem; color: var(--muted); }
+
+.foot { text-align: center; color: var(--muted); font-size: .8rem; padding: 20px 16px 30px; }
+.foot a { color: inherit; }
+
+@media (max-width: 520px) {
+  .top h1 { font-size: 1.5rem; }
+  .w { min-height: 26px; padding: 2px 5px; font-size: .95rem; }
+}
